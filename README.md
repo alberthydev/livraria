@@ -53,35 +53,6 @@ Exemplos com curl
 - Listar:
   curl -X GET http://localhost:3000/livros
 - Criar:
-  curl -X POST http://localhost:3000/livros 
-  -H "Content-Type: application/json" 
+  curl -X POST http://localhost:3000/livros
+  -H "Content-Type: application/json"
   -d '{"titulo":"Exemplo","autor":"Fulano","ano":2021,"preco":29.9}'
-
-Autenticação
-Se a API exigir autenticação JWT, inclua no header:
-Authorization: Bearer `<token>`
-
-Tratamento de erros
-
-- Respostas devem usar códigos HTTP apropriados (200, 201, 400, 401, 404, 500).
-- Retornar mensagens de erro claras no corpo JSON:
-  { "error": "Mensagem descritiva" }
-
-Testes
-
-- Adicione testes automatizados (jest / mocha) conforme necessidade.
-- Comando sugerido:
-  npm test
-
-Contribuição
-
-- Abra issues para bugs ou features.
-- Fork, branch com feature/bugfix e PR com descrição clara.
-
-Licença
-
-- Defina uma licença no repositório (ex: MIT). Atualize conforme necessário.
-
-Contato
-
-- Adicione instruções de contato ou link para o repositório.
