@@ -12,5 +12,12 @@
     "autor": "Andrew Hunt",
     "categoria": "Programação",
     "ano": 1999
+  },
+  {
+    "id": 3,
+    "titulo": "Clean Code 2",
+    "autor": "Albert Marques",
+    "categoria": "Programação",
+    "ano": 2025
   }
 ]
