@@ -2,7 +2,7 @@ const errorHandler = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     res.status(500).json({
       erro: "Erro interno no servidor",
-      mensagem: "err.message",
+      mensagem: err.message,
       stack: err.stack,
       timestamp: new Date().toISOString(),
       url: req.originalUrl,

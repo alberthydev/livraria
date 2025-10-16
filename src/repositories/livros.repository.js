@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const RepositoryBase = require("./repositorie.interface");
+const Livro = require("../models/livro.model").default;
+
 class LivrosRepository extends RepositoryBase {
   constructor() {
     super();
@@ -8,7 +10,8 @@ class LivrosRepository extends RepositoryBase {
   }
   async findAll() {
     const dados = await this._lerArquivo();
-    return JSON.parse(dados);
+    const lista = JSON.parse(dados);
+    return lista.map(item => Livro.fromJSON(item));
   }
   async findById(id) {
     const livros = await this.findAll();
@@ -17,26 +20,33 @@ class LivrosRepository extends RepositoryBase {
   async create(livroData) {
     const livros = await this.findAll();
     const novoId = await this.getNextId();
-    const novoLivro = { id: novoId, ...livroData };
+    const novoLivro = new Livro({ id: novoId, ...livroData });
     livros.push(novoLivro);
-    await this._saveToFile(livros);
+    await this._saveToFile(livros.map(l => l.toJSON()));
     return novoLivro;
   }
   async update(id, dadosAtualizados) {
     const livros = await this.findAll();
-    const indice = livros.findIndex(l => l.id === id);
-    if (indice === -1) throw new Error("Livro não encontrado");
-    livros[indice] = { ...livros[indice], ...dadosAtualizados };
-    await this._saveToFile(livros);
+    const indice = livros.findIndex(livro => livro.id === id);
+    if (indice === -1) {
+      const error = new Error("Livro não encontrado");
+      error.statusCode = 404;
+      throw error;
+    }
+    livros[indice] = new Livro({ ...livros[indice], ...dadosAtualizados });
+    await this._saveToFile(livros.map(l => l.toJSON()));
     return livros[indice];
   }
   async delete(id) {
     const livros = await this.findAll();
-    const indice = livros.findIndex(l => l.id === id);
-    if (indice === -1) throw new Error("Livro não encontrado");
-    const livroRemovido = livros[indice];
-    livros.splice(indice, 1);
-    await this._saveToFile(livros);
+    const indice = livros.findIndex(livro => livro.id === id);
+    if (indice === -1) {
+      const error = new Error("Livro não encontrado");
+      error.statusCode = 404;
+      throw error;
+    }
+    const [livroRemovido] = livros.splice(indice, 1);
+    await this._saveToFile(livros.map(l => l.toJSON()));
     return livroRemovido;
   }
   async _saveToFile(data) {

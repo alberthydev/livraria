@@ -4,6 +4,8 @@
     "titulo": "Clean Code",
     "autor": "Robert C. Martin",
     "categoria": "Programação",
+    "editora": "Penguim",
+    "paginas": 50,
     "ano": 2008
   },
   {
@@ -11,13 +13,17 @@
     "titulo": "O Programador Pragmático",
     "autor": "Andrew Hunt",
     "categoria": "Programação",
+    "editora": "Penguim",
+    "paginas": 50,
     "ano": 1999
   },
   {
     "id": 3,
-    "titulo": "Clean Code 2",
-    "autor": "Albert Marques",
-    "categoria": "Programação",
-    "ano": 2025
+    "titulo": "Livro Bacanasso",
+    "autor": "Autor Bacanasso",
+    "categoria": "Programation",
+    "editora": "Publication",
+    "paginas": 15,
+    "ano": 2019
   }
 ]

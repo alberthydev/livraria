@@ -7,7 +7,7 @@ class LivrosController {
     const livros = await this.repository.findAll();
     res.status(200).json(livros);
   }
-  async buscarLivrosPorId(req, res, next) {
+  async buscarLivroPorId(req, res, next) {
     const id = parseInt(req.params.id);
     const livro = await this.repository.findById(id);
     if (!livro) {
@@ -16,11 +16,13 @@ class LivrosController {
     res.status(200).json(livro);
   }
   async criarLivro(req, res, next) {
-    const { titulo, autor, categoria, ano } = req.body;
+    const { titulo, autor, categoria, editora, paginas, ano } = req.body;
     const novoLivro = await this.repository.create({
       titulo,
       autor,
       categoria,
+      editora,
+      paginas: parseInt(paginas),
       ano: parseInt(ano)
     });
     res.status(201).json({
