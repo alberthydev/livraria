@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const RepositoryBase = require("./repositorie.interface");
-const Livro = require("../models/livro.model").default;
+const Livro = require("../models/livro.model");
 
 class LivrosRepository extends RepositoryBase {
   constructor() {

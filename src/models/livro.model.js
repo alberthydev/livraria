@@ -51,3 +51,4 @@ class Livro {
 }
 
 module.exports = Livro;
+
