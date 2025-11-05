@@ -57,7 +57,7 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
 * /logout -> desautentica o usuário logado do momento;
 * /livros -> lista todos os livros cadastrados (necessário autenticação);
 * /livros/$id -> retorna o livro {id} digitado (necessário autenticação);
-* /livros -> com o método post, pode ser feito cadastro de livros com a seguinte estrutura:
+* /livros -> com o método post, pode ser feito cadastro de livros com a seguinte estrutura: (necessário autenticação);
 
   ```json
   {
@@ -69,7 +69,7 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
     "ano":int
   }
   ```
-* /livros/$id -> com o método put, pode ser feito alteração do livro especifico do {id} fornecido:
+* /livros/$id -> com o método put, pode ser feito alteração do livro especifico do {id} fornecido: (necessário autenticação);
 
   ```json
   {
@@ -81,4 +81,4 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
     "ano":int
   }
   ```
-* /livros/$id -> com o método delete, é feito a exclusão do livro do {id} fornecido.
+* /livros/$id -> com o método delete, é feito a exclusão do livro do {id} fornecido. (necessário autenticação);
