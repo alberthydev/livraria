@@ -65,8 +65,8 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
     "autor":"Autor Livro",
     "categoria":"Categoria Livro",
     "editora":"Editora Livro",
-    "paginas":int,
-    "ano":int
+    "paginas":"int",
+    "ano":"int"
   }
   ```
 * /livros/$id -> com o método put, pode ser feito alteração do livro especifico do {id} fornecido: (necessário autenticação);
@@ -77,8 +77,8 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
     "autor":"Autor Livro Atualizado",
     "categoria":"Categoria Livro Atualizado",
     "editora":"Editora Livro Atualizado",
-    "paginas":int, 
-    "ano":int
+    "paginas":"int", 
+    "ano":"int"
   }
   ```
 * /livros/$id -> com o método delete, é feito a exclusão do livro do {id} fornecido. (necessário autenticação);
