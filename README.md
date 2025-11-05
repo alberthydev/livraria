@@ -1,58 +1,84 @@
-# API Livraria
+# api livraria
 
-Descrição
-A API Livraria fornece operações CRUD para gerenciar livros (listar, consultar, criar, atualizar e remover). Este README contém instruções básicas de instalação, execução e exemplos de uso.
+## descrição
 
-Tecnologias
+a api livraria fornece operações crud para gerenciar livros (listar, consultar, criar, atualizar e remover) protegidas por autenticação.
 
-- Node.js / Express (exemplo)
-- Banco de dados: SQLite / PostgreSQL / MongoDB (conforme implementação)
-- Autenticação: JWT (opcional)
+## tecnologias
 
-Instalação
+- node.js / express
+- banco de dados: sqlite
+- autenticação: session-id
 
-1. Clone o repositório:
-   git clone `<repo-url>` /home/albert/dev/livraria
-2. Instale dependências:
-   npm install
-3. Configure variáveis de ambiente (exemplo .env):
-   - PORT=3000
-   - DATABASE_URL=...
-   - JWT_SECRET=...
+## endpoints
 
-Execução
+* /register -> Criar um novo usuário:
 
-- Desenvolvimento:
-  npm run dev
-- Produção:
-  npm start
+  ```json
+  {
+    "fullname":"Seu Nome Completo",
+    "email":"seuemail@seuemail.com",
+    "username":"seu_usuario",
+    "password":"sua_senha"
+  }
+  ```
 
-Endpoints principais
+  o e-mail é único de cada usuário, porém, assim como o nome completo, ele não é obrigatório, foi implementado por convenicência de login.
+* /login -> logar no usuário cadastrado, caso o usuário possua e-mail, ele pode ser utilizado para autenticação:
 
-- GET /livros
-  - Lista todos os livros (opções de paginação e filtros conforme implementação).
-- GET /livros/:id
-  - Retorna os dados de um livro pelo id.
-- POST /livros
-  - Cria um novo livro.
-  - Body (JSON) exemplo:
-    {
-    "titulo": "Nome do Livro",
-    "autor": "Autor",
-    "ano": 2020,
-    "preco": 49.90,
-    "categoria": "Ficção"
-    }
-- PUT /livros/:id
-  - Atualiza os dados de um livro.
-- DELETE /livros/:id
-  - Remove um livro.
+  ```json
+  {
+    "email":"seuemail@seuemail.com",
+    "password":"sua_senha"
+  }
+  ```
 
-Exemplos com curl
+  caso só possua o usuário, a forma de autenticação é a mesma, porém, com o usuário:
 
-- Listar:
-  curl -X GET http://localhost:3000/livros
-- Criar:
-  curl -X POST http://localhost:3000/livros
-  -H "Content-Type: application/json"
-  -d '{"titulo":"Exemplo","autor":"Fulano","ano":2021,"preco":29.9}'
+  ```json
+  {
+    "username":"seu_usuario",
+    "password":"sua_senha"
+  }
+  ```
+
+  {
+* /me -> retorna informações do usuário logado do momento:
+
+  ```json
+  {
+    "fullname":"Seu Nome Completo",
+    "email":"seuemail@seuemail.com",
+    "username":"seu_usuario",
+    "create_at":"data_de_criação_do_usuario"
+  }
+
+  ```
+* /logout -> desautentica o usuário logado do momento;
+* /livros -> lista todos os livros cadastrados (necessário autenticação);
+* /livros/$id -> retorna o livro {id} digitado (necessário autenticação);
+* /livros -> com o método post, pode ser feito cadastro de livros com a seguinte estrutura:
+
+  ```json
+  {
+    "titulo":"Seu Livro",
+    "autor":"Autor Livro",
+    "categoria":"Categoria Livro",
+    "editora":"Editora Livro",
+    "paginas":int,
+    "ano":int
+  }
+  ```
+* /livros/$id -> com o método put, pode ser feito alteração do livro especifico do {id} fornecido:
+
+  ```json
+  {
+    "titulo":"Seu Livro Atualizado",
+    "autor":"Autor Livro Atualizado",
+    "categoria":"Categoria Livro Atualizado",
+    "editora":"Editora Livro Atualizado",
+    "paginas":int, 
+    "ano":int
+  }
+  ```
+* /livros/$id -> com o método delete, é feito a exclusão do livro do {id} fornecido.
