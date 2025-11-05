@@ -23,7 +23,7 @@ a api livraria fornece operações crud para gerenciar livros (listar, consultar
   }
   ```
 
-  o e-mail é único de cada usuário, porém, assim como o nome completo, ele não é obrigatório, foi implementado por convenicência de login.
+  o e-mail é único de cada usuário, porém, assim como o nome completo, ele não é obrigatório, foi implementado por conveniência de login.
 * /login -> logar no usuário cadastrado, caso o usuário possua e-mail, ele pode ser utilizado para autenticação:
 
   ```json
