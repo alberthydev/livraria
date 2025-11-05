@@ -6,18 +6,21 @@ class AuthController {
   }
   async register(req, res, next) {
     try {
-      const { username, password } = req.body;
+      const { fullname, email, username, password } = req.body;
       if (!username || !password) {
         return res.status(400).json({ erro: 'Preencha todos os campos obrigatórios.' });
       }
-      // aguardar o resultado assíncrono
+
       if (await this.usersRepo.findByUsername(username)) {
         return res.status(409).json({ erro: 'Usuário já existe.' });
       }
+
+      if (await this.usersRepo.findByEmail(email)){
+        return res.status(409).json({ erro: 'Email já cadastrado' });
+      }
       
       const hash = await bcrypt.hash(password, 10);
-      // usar a chave esperada pelo repositório e await no create
-      const user = await this.usersRepo.create({ username, passwordHash: hash });
+      const user = await this.usersRepo.create({ fullname, email, username, passwordHash: hash });
       req.session.userId = user.id;
       res.status(201).json({ mensagem: 'Usuário registrado com sucesso!', user: user.toJSON() });
     } catch (err) {
@@ -27,11 +30,16 @@ class AuthController {
 
   async login(req, res, next) {
     try {
-      const { username, password } = req.body;
-      const user = await this.usersRepo.findByUsername(username);
+      const { email, username, password } = req.body;
+ 
+      const userByEmail = email ? await this.usersRepo.findByEmail(email) : null;
+      const user = userByEmail || await this.usersRepo.findByUsername(username);
+
       if (!user) {
         return res.status(401).json({ erro: 'Usuário ou senha inválidos.' });
       }
+
+      console.log(user.password);
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
         return res.status(401).json({ erro: 'Usuário ou senha inválidos.' });

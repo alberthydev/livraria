@@ -6,7 +6,7 @@ const authRoutes = require("./auth.routes")
 
 router.get("/", (req, res) => {
   res.status(200).json({
-    mensagem: "Bem-vindo à API da livraria! Use /livros para gerenciar os livros",
+    mensagem: "Bem-vindo à API da livraria! Use seu usuário com /login para visualizar e gerênciar os livros em /livros",
   });
 });
 

@@ -2,21 +2,30 @@ const db = require('../database/sqlite');
 const User = require('../models/user.model');
 class UsersRepository {
   async findById(id) {
-    const row = await db.get('SELECT id, username, created_at FROM users WHERE id = ?', [id]);
+    const row = await db.get('SELECT id, fullname, email, username, created_at FROM users WHERE id = ?', [id]);
     return row ? User.fromDB(row) : null;
   }
   async findByUsername(username) {
-    const row = await db.get('SELECT id, username, password_hash, created_at FROM users WHERE username = ?', [username]);
+    const row = await db.get('SELECT id, fullname, email, username, password_hash, created_at FROM users WHERE username = ?', [username]);
     if (!row) return null;
     const user = User.fromDB(row);
     // expose the hash under `password` so controller bcrypt.compare(user.password, ...)
     user.password = row.password_hash;
     return user;
   }
-  async create({ username, passwordHash }) {
-    const result = await db.run('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username, passwordHash]);
+
+  async findByEmail(email){
+    const row = await db.get('SELECT id, fullname, email, username, password_hash, created_at FROM users WHERE email = ?', [email]);
+    if(!row) return null;
+    const user = User.fromDB(row);
+    user.password = row.password_hash;
+    return user
+  }
+
+  async create({ fullname, email, username, passwordHash }) {
+    const result = await db.run('INSERT INTO users (fullname, email, username, password_hash) VALUES (?, ?, ?, ?)', [fullname, email, username, passwordHash]);
     console.log(result);
-    const row = await db.get('SELECT id, username, created_at FROM users WHERE id = ?', [result.lastInsertRowid]);
+    const row = await db.get('SELECT id, username, email, created_at FROM users WHERE id = ?', [result.lastInsertRowid]);
     return User.fromDB(row);
   }
 }
