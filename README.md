@@ -35,4 +35,4 @@ o app iniciará na porta 3000:
 `http://localhost:3000`
 
 > [!NOTE]
-> A porta **3000** e **3333** precisam estar livre para a aplicação rodar.
+> A porta **3000** e **3333** precisam estar livres para a aplicação rodar.
