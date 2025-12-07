@@ -7,6 +7,7 @@ sistema de gerênciamento simples de livros
 ## tecnologias
 
 - node.js / express
+- react / vite
 - banco de dados: sqlite
 - react / vite
 - autenticação: session-id
