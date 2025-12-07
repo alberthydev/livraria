@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Livros from './pages/Livros'
+import Favoritos from './pages/Favoritos' 
+import LivroDetalhes from './pages/LivroDetalhes' 
 import './App.css'
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
               <Route path="/livros" element={<PrivateRoute><Livros /></PrivateRoute>} />
+              <Route path="/livros/:id" element={<PrivateRoute><LivroDetalhes /></PrivateRoute>} />
+              <Route path="/favoritos" element={<PrivateRoute><Favoritos /></PrivateRoute>} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

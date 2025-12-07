@@ -17,8 +17,9 @@ class LivrosRepository extends RepositoryBase {
       "INSERT INTO livros (titulo, autor, categoria, editora, paginas, ano) VALUES (?, ?, ?, ?, ?, ?)",
       [novo.titulo, novo.autor, novo.categoria, novo.editora, novo.paginas, novo.ano]
     );
-    console.log(res.id);
-    return this.findById(res.id);
+    console.log(res.lastInsertRowid); 
+    
+    return this.findById(res.lastInsertRowid);
   }
 
   async update(id, dados) {

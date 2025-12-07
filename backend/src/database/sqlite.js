@@ -15,23 +15,52 @@ function run(sql, params = []) { return getDb().prepare(sql).run(...params); }
 function get(sql, params = []) { return getDb().prepare(sql).get(...params); }
 function all(sql, params = []) { return getDb().prepare(sql).all(...params); }
 function init() {
-  run(`CREATE TABLE IF NOT EXISTS livros (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        titulo TEXT NOT NULL,
-        autor TEXT NOT NULL,
-        categoria TEXT NOT NULL,
-        editora TEXT NOT NULL,
-        paginas INTEGER NOT NULL,
-        ano INTEGER NOT NULL
-    )`);
-    run(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        fullname TEXT,
-        email TEXT UNIQUE, 
-        username TEXT NOT NULL UNIQUE,
-        password_hash TEXT NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`);
+  run(`
+    CREATE TABLE IF NOT EXISTS livros (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      titulo TEXT NOT NULL,
+      autor TEXT NOT NULL,
+      categoria TEXT NOT NULL,
+      editora TEXT NOT NULL,
+      paginas INTEGER NOT NULL,
+      ano INTEGER NOT NULL
+    )
+    `);
+  run(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      fullname TEXT,
+      email TEXT UNIQUE, 
+      username TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    `);
+  run(`
+    CREATE TABLE IF NOT EXISTS user_books (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      book_id INTEGER,
+      review TEXT,
+      rating INTEGER,
+      status TEXT,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (book_id) REFERENCES livros(id),
+      UNIQUE(user_id, book_id)
+    )
+    `);
+
+  run(`
+    CREATE TABLE IF NOT EXISTS favorites (
+    user_id INTEGER,
+    book_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, book_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES livros(id)
+  )
+`);
+
   console.log('Banco de dados SQLite inicializado');
 }
 module.exports = { getDb, run, get, all, init };

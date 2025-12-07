@@ -1,84 +1,37 @@
-# api livraria
+# livraria
 
 ## descrição
 
-a api livraria fornece operações crud para gerenciar livros (listar, consultar, criar, atualizar e remover) protegidas por autenticação.
+sistema de gerênciamento simples de livros
 
 ## tecnologias
 
 - node.js / express
 - banco de dados: sqlite
+- react / vite
 - autenticação: session-id
 
-## endpoints
+## funcionalidades escolhidas
 
-* /register -> Criar um novo usuário:
+* reviews de livros
+* sistema de favorito individual de cada usuário
+* dark mode
 
-  ```json
-  {
-    "fullname":"Seu Nome Completo",
-    "email":"seuemail@seuemail.com",
-    "username":"seu_usuario",
-    "password":"sua_senha"
-  }
-  ```
+## executar o projeto
 
-  o e-mail é único de cada usuário, porém, assim como o nome completo, ele não é obrigatório, foi implementado por conveniência de login.
-* /login -> logar no usuário cadastrado, caso o usuário possua e-mail, ele pode ser utilizado para autenticação:
+para executar o projeto, você precisa inicializar a api e a interface, vá em suas respectivas pastas com:
 
-  ```json
-  {
-    "email":"seuemail@seuemail.com",
-    "password":"sua_senha"
-  }
-  ```
+`cd backend` | API
 
-  caso só possua o usuário, a forma de autenticação é a mesma, porém, com o usuário:
+`cd frontend` | Interface
 
-  ```json
-  {
-    "username":"seu_usuario",
-    "password":"sua_senha"
-  }
-  ```
+então rodar o seguinte comando em ambas:
 
-  {
-* /me -> retorna informações do usuário logado do momento:
+`npm run dev`
 
-  ```json
-  {
-    "fullname":"Seu Nome Completo",
-    "email":"seuemail@seuemail.com",
-    "username":"seu_usuario",
-    "create_at":"data_de_criação_do_usuario"
-  }
+o app iniciará na porta 3000:
 
-  ```
-* /logout -> desautentica o usuário logado do momento;
-* /livros -> lista todos os livros cadastrados (necessário autenticação);
-* /livros/$id -> retorna o livro {id} digitado (necessário autenticação);
-* /livros -> com o método post, pode ser feito cadastro de livros com a seguinte estrutura: (necessário autenticação);
+`http://localhost:3000`
 
-  ```json
-  {
-    "titulo":"Seu Livro",
-    "autor":"Autor Livro",
-    "categoria":"Categoria Livro",
-    "editora":"Editora Livro",
-    "paginas":"int",
-    "ano":"int"
-  }
-  ```
-* /livros/$id -> com o método put, pode ser feito alteração do livro especifico do {id} fornecido: (necessário autenticação);
-
-  ```json
-  {
-    "titulo":"Seu Livro Atualizado",
-    "autor":"Autor Livro Atualizado",
-    "categoria":"Categoria Livro Atualizado",
-    "editora":"Editora Livro Atualizado",
-    "paginas":"int", 
-    "ano":"int"
-  }
-  ```
-* /livros/$id -> com o método delete, é feito a exclusão do livro do {id} fornecido. (necessário autenticação);
+> [!NOTE]
+> A porta **3000** e **3333** precisam estar livre para a aplicação rodar.

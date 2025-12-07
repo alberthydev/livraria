@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Verifica autenticação ao montar o contexto (executado uma vez)
   useEffect(() => {
     checkAuth();
   }, []);

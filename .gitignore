@@ -1,4 +1,4 @@
 node_modules
-src/data/*.db
+backend/src/data/*.db
 cookies.txt
 .env

@@ -37,6 +37,7 @@ class Livro {
       ano: json.ano,
     });
   }
+
   toJSON() {
     return {
       id: this.id,
@@ -51,4 +52,3 @@ class Livro {
 }
 
 module.exports = Livro;
-
