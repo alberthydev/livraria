@@ -24,7 +24,7 @@ class ReviewController {
 
   async index(req, res) {
     try {
-      const { id } = req.params; // bookId
+      const { id } = req.params;
       const reviews = await reviewRepository.findByBookId(id);
       res.json(reviews);
     } catch (error) {

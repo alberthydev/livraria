@@ -3,7 +3,7 @@ const favoritesRepo = require("../repositories/favorites.repository");
 class FavoritesController {
   async toggle(req, res) {
     try {
-      const userId = req.session.userId; // Pega da sessão (auth)
+      const userId = req.session.userId;
       const { bookId } = req.body;
 
       if (!userId) return res.status(401).json({ error: 'Login necessário' });
