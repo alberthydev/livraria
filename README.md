@@ -11,27 +11,11 @@ sistema de gerênciamento simples de livros
 - banco de dados: sqlite
 - autenticação: session-id
 
-## funcionalidades escolhidas
+## GitHub Actions
 
-* reviews de livros
-* sistema de favorito individual de cada usuário
-* dark mode
+O pipeline tem dois jobs paralelos, um para cada pasta do repositório):
 
-## executar o projeto
+ - Job `backend`: Entra na `backend/`, instala as dependências do Express e verifica se o código não tem erros de sintaxe.
+ - Job `frontend`: Entra na pasta `frontend/`, instala as dependências do React e roda o `npm run build` do Vite, que já valida se o projeto compila sem erros.
 
-para executar o projeto, você precisa inicializar a api e a interface, vá em suas respectivas pastas com:
-
-`cd backend` | API
-
-`cd frontend` | Interface
-
-então rodar o seguinte comando em ambas:
-
-`npm run dev`
-
-o app iniciará na porta 3000:
-
-`http://localhost:3000`
-
-> [!NOTE]
-> A porta **3000** e **3333** precisam estar livres para a aplicação rodar.
+O `cache: 'npm'` com `cache-dependency-path` acelera as execuções seguintes, o GitHub reutiliza o `node-modules` em vez de baixar tudo do zero a cada push
