@@ -13,7 +13,7 @@ sistema de gerênciamento simples de livros
 
 ## GitHub Actions
 
-O pipeline tem dois jobs paralelos, um para cada pasta do repositório):
+O pipeline tem dois jobs paralelos, um para cada pasta do repositório:
 
  - Job `backend`: Entra na `backend/`, instala as dependências do Express e verifica se o código não tem erros de sintaxe.
  - Job `frontend`: Entra na pasta `frontend/`, instala as dependências do React e roda o `npm run build` do Vite, que já valida se o projeto compila sem erros.
